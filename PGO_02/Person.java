@@ -1,8 +1,9 @@
-package PGO_02;
 
 // import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+// import java.util.List;
 
 public class Person {
   private String name;
@@ -20,6 +21,12 @@ public class Person {
     setSurname(surname);
     setDateOfBirth(dateOfBirth);
     setAdres(adress);
+  }
+
+  public Person(String name, String surname) {
+    setName(name);
+    setSurname(surname);
+
   }
 
   // setters and getters
@@ -74,12 +81,11 @@ public class Person {
   }
 
   // methods
-  public Book PublishBook(String name, Genre genre, Lang lang, LocalDate pubDate) {
-    // ArrayList<Person> authors = new ArrayList<Person>();
-    // authors.add(this);
-    Book b = new Book(name, genre, lang, authors);
-    b.setPublishDate(pubDate);
-    return b;
+  public Book PublishBook(String name, Genre genre, Lang language, LocalDate pubDate, Person author) {
+    ArrayList<Person> authors = new ArrayList<Person>();
+    authors.add(this);
+    Book asd = new Book(name, genre, language, pubDate, authors);
+    asd.setPublishDate(pubDate);
+    return asd;
   }
-
 }

@@ -1,10 +1,7 @@
-package PGO_02;
 
 // import java.util.HashSet;
 // import java.util.Set;
-
 // import java.time.LocalDate;
-
 public class Adress {
   // private static Set<Adress> extent = new HashSet<>();
   private String country;
@@ -21,7 +18,6 @@ public class Adress {
     setHouse(house);
     setFlat(flat);
   }
-
   // setters and getters
 
   public void setCountry(String country) {
@@ -51,6 +47,9 @@ public class Adress {
   }
 
   public void setStreet(String street) {
+    if (city == null || city.isEmpty()) {
+      throw new ValidationException("Street musn't be empty");
+    }
     this.street = street;
   }
 

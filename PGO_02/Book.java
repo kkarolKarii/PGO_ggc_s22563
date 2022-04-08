@@ -1,9 +1,10 @@
-package PGO_02;
 
 import java.time.LocalDate;
 // import java.time.Period;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Book {
@@ -16,10 +17,11 @@ public class Book {
   private LocalDate publishDate;
   private int borrowCount;
   private boolean isAvailable = true;
-  private Person whoBorrowed;
+  private String whoBorrowed;
+  private List<Person> authors = new ArrayList<>();
 
   // constructors
-  public Book(Long ID, String name, Genre genre, Lang language, LocalDate publishDate, int borrowCount,
+  public Book(Long ID, String name, Genre genre, Lang language, LocalDate publishDate, List<Person> authors,
       boolean isAvailable) {
     setID(ID);
     setName(name);
@@ -28,6 +30,9 @@ public class Book {
     setPublishDate(publishDate);
     setBorrowCount(borrowCount);
     setIsAvailable(isAvailable);
+    for (Person author : authors) {
+      setAuthor(author);
+    }
     extent.add(this);
   }
 
@@ -40,6 +45,21 @@ public class Book {
     setBorrowCount(borrowCount);
   }
 
+  public Book(String name, Genre genre, Lang language, LocalDate publishDate, ArrayList<Person> authors) {
+    setName(name);
+    setGenre(genre);
+    setLange(language);
+    setPublishDate(publishDate);
+    for (Person author : authors) {
+      setAuthor(author);
+    }
+    extent.add(this);
+  }
+
+  public void setAuthor(Person author) {
+    this.authors.add(author);
+  }
+
   // setters and getters
   public Long getID() {
     return ID;
@@ -47,7 +67,7 @@ public class Book {
 
   public void setID(Long id) {
     if (id == null || id < 0) {
-      throw new ValidationException("ID must not be empty and can't be lower than 0");
+      throw new ValidationException("ID musn't be empty and can't be lower than 0");
     }
     this.ID = id;
   }
@@ -58,12 +78,12 @@ public class Book {
 
   public void setName(String name) {
     if (name == null || name.isEmpty()) {
-      throw new ValidationException("Name must not be empty");
+      throw new ValidationException("Name musn't be empty");
     }
     this.name = name;
   }
 
-  public Person getwhoBorrowed() {
+  public String getwhoBorrowed() {
     return this.whoBorrowed;
   }
 
@@ -73,7 +93,7 @@ public class Book {
 
   public void setGenre(Genre genre) {
     if (genre == null) {
-      throw new ValidationException("Name musn't be empty");
+      throw new ValidationException("Genre musn't be empty");
     }
     this.genre = genre;
   }
@@ -105,8 +125,8 @@ public class Book {
   }
 
   public void setBorrowCount(int borrowCount) {
-    if (borrowCount < 0) {
-      throw new ValidationException("borrow count can not be lower than 0");
+    if (borrowCount != 1) {
+      throw new ValidationException("You can borrow only 1 book");
     }
     this.borrowCount = borrowCount;
   }
@@ -133,14 +153,14 @@ public class Book {
     } else {
       this.borrowCount += 1;
       isAvailable = false;
-      whoBorrowed = who;
+      whoBorrowed = who.getName();
       System.out.println("This book is borrowed by Mrs/Miss " + who.getName());
     }
   }
 
   public void PlaceBack() {
     this.isAvailable = true;
-    System.out.print("Book:" + getName() + "is now available");
+    System.out.print("Book:" + getName() + " is now available");
     whoBorrowed = null;
   }
 
