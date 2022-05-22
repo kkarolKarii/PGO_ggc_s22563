@@ -1,3 +1,4 @@
+package PGO_ggc_s22563.cw1.src;
 
 import java.util.Arrays;
 import java.util.Scanner;
