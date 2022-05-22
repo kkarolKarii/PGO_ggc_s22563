@@ -1,13 +1,13 @@
 package PGO_ggc_s22563.PGO_04;
 
 public class Matrix {
+  private int[][] Matrix;
   private static int EmptyRowsNow = 0;
   private static int[][] MatrixStats;
-  private int[][] Matrix;
 
   private Matrix(int[][] MatrixStats) {
-    MatrixStats = null;
     Matrix = MatrixStats;
+    MatrixStats = null;
     EmptyRowsNow = 0;
   }
 
@@ -42,26 +42,16 @@ public class Matrix {
   // ========================================
 
   // ========================================
-
-  public Matrix add(Matrix MatrixB) {
-    if (MatrixB == null) {
-      System.out.println("Null ");
-      return null;
-    }
-    for (int rows = 0; rows < Matrix.length; rows++) {
-      for (int col = 0; col < Matrix[rows].length; col++) {
-        Matrix[rows][col] = Matrix[rows][col] + MatrixB.Matrix[rows][col];
+  public Matrix add(Matrix matrixB) {
+    for (int row = 0; row < Matrix.length; row++) {
+      for (int column = 0; column < Matrix[row].length; column++) {
+        Matrix[row][column] = Matrix[row][column] + matrixB.Matrix[row][column];
       }
     }
     return this;
   }
 
-  // ========================================
   public static Matrix add(Matrix MatrixA, Matrix MatrixB) {
-    if (MatrixA == null || MatrixB == null) {
-      System.out.println("Null");
-      return null;
-    }
     int[][] newMatrix = new int[MatrixStats.length][MatrixStats[0].length];
     for (int row = 0; row < newMatrix.length; row++) {
       for (int xCol = 0; xCol < newMatrix[row].length; xCol++) {
@@ -70,10 +60,11 @@ public class Matrix {
     }
     return new Matrix(newMatrix);
   }
+  // ========================================
 
   // ========================================
   public void print() {
-    for (int[] ints : MatrixStats) {
+    for (int[] ints : Matrix) {
       System.out.print("| ");
       for (int anInt : ints) {
         System.out.print(anInt + " ");
@@ -84,6 +75,23 @@ public class Matrix {
   }
 
   // ========================================
+
+  // ========================================
+  public Matrix subtract(Matrix Matrix2) {
+    if (Matrix2 == null) {
+      System.out.println("Null");
+      return null;
+    } else {
+
+      for (int x = 0; x < Matrix.length; x++) {
+        for (int xCol = 0; xCol < Matrix[x].length; xCol++) {
+          Matrix[x][xCol] = Matrix[x][xCol] - Matrix2.Matrix[x][xCol];
+        }
+      }
+    }
+    return this;
+  }
+
   public Matrix multiple(Matrix MatrixB) {
     if (MatrixB == null || this.Matrix == null) {
       System.out.println("Matrix is null");
@@ -100,22 +108,6 @@ public class Matrix {
       System.out.println("Wrong Data");
       return null;
     }
-  }
-
-  // ========================================
-  public Matrix subtract(Matrix Matrix2) {
-    if (Matrix2 == null) {
-      System.out.println("Null");
-      return null;
-    } else {
-
-      for (int x = 0; x < Matrix.length; x++) {
-        for (int xCol = 0; xCol < Matrix[x].length; xCol++) {
-          Matrix[x][xCol] = Matrix[x][xCol] - Matrix2.Matrix[x][xCol];
-        }
-      }
-    }
-    return this;
   }
 
 }
