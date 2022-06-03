@@ -1,4 +1,3 @@
-package PGO_ggc_s22563.PGO_02;
 
 import java.time.LocalDate;
 // import java.time.Period;

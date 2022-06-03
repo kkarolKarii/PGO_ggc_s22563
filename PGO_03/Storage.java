@@ -1,4 +1,3 @@
-package PGO_ggc_s22563.PGO_03;
 
 public class Storage {
   private int deliveryTime;
