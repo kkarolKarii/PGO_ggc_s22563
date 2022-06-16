@@ -1,3 +1,4 @@
 {
-  "java.project.sourcePaths": ["PGO_03", "PGO_02", "PGO_05"]
+  "java.project.sourcePaths": ["PGO_03", "PGO_02", "PGO_05"],
+  "java.format.settings.url": "eclipse-formatter.xml"
 }
